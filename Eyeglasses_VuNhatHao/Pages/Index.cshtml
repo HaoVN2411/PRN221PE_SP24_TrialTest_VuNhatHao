@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post">
+    <div>
+        <label asp-for="RequestLoginModel.EmailAddress"></label>
+        <input asp-for="RequestLoginModel.EmailAddress" />
+    </div>
+    <div>
+        <label asp-for="RequestLoginModel.Password"></label>
+        <input asp-for="RequestLoginModel.Password" />
+    </div>
+
+    @if (ModelState.IsValid == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+    <button type="submit">Login</button>
+</form>
+
